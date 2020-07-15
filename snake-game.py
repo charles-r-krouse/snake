@@ -100,33 +100,33 @@ class snake(object):
                     self.dir_y = 1
                     self.turns[self.head.pos[:]] = [self.dir_x, self.dir_y]
                     
-            # loop through every cube in the snake body
-            for i, c in enumerate(self.body):
-                # get the cube positions on the grid
-                p = c.pos[:]
-                # check if the cube current position is one where we turned
-                if p in self.turns:
-                    turn = self.turns[p] # get the direction to turn
-                    c.move(turn[0], turn[1]) # turn in desired direction
-                    # check if it is the last cube in the body, and if it is,
-                    # then remove it from the body
-                    if (i==len(self.body)-1):
-                        self.turns.pop(p)
-                    # if not the last cube, then we need to check if we reached
-                    # the edge of the screen
+        # loop through every cube in the snake body
+        for i, c in enumerate(self.body):
+            # get the cube positions on the grid
+            p = c.pos[:]
+            # check if the cube current position is one where we turned
+            if p in self.turns:
+                turn = self.turns[p] # get the direction to turn
+                c.move(turn[0], turn[1]) # turn in desired direction
+                # check if it is the last cube in the body, and if it is,
+                # then remove it from the body
+                if (i==len(self.body)-1):
+                    self.turns.pop(p)
+                # if not the last cube, then we need to check if we reached
+                # the edge of the screen
+            else:
+                if (c.dir_x==-1 and c.pos[0]<=0):
+                    c.pos = (c.rows-1, c.pos[1])
+                elif(c.dir_x==1 and c.pos[0]>=c.rows-1):
+                    c.pos = (0, c.pos[1])
+                elif(c.dir_y==1 and c.pos[1]>=c.rows-1):
+                    c.pos = (c.pos[0], 0)
+                elif(c.dir_y==-1 and c.pos[1]<=0):
+                    c.pos = (c.pos[0], c.rows-1)
+                # if we don't reach the edge of the screen, then
+                # proceed to move as normal
                 else:
-                    if (c.dir_x==-1 and c.pos[0]<=0):
-                        c.pos = (c.rows-1, c.pos[1])
-                    elif(c.dir_x==1 and c.pos[0]>=c.rows-1):
-                        c.pos = (0, c.pos[1])
-                    elif(c.dir_y==1 and c.pos[1]>=c.rows-1):
-                        c.pos = (c.pos[0], 0)
-                    elif(c.dir_y==-1 and c.pos[1]<=0):
-                        c.pos = (c.pos[0], c.rows-1)
-                    # if we don't reach the edge of the screen, then
-                    # proceed to move as normal
-                    else:
-                        c.move(c.dir_x, c.dir_y)
+                    c.move(c.dir_x, c.dir_y)
     
     def reset(self, pos):
         self.head = cube(pos)
@@ -237,7 +237,7 @@ def main():
     # main loop
     flag = True
     while flag:
-        pygame.time.delay(1)
+        pygame.time.delay(100)
         # ensure that the game runs at 10 FPS
         clock.tick(100)
         # move the snake
