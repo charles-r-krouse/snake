@@ -114,19 +114,19 @@ class snake(object):
                         self.turns.pop(p)
                     # if not the last cube, then we need to check if we reached
                     # the edge of the screen
-                    else: 
-                        if (c.dir_x==-1 and c.pos[0]<=0):
-                            c.pos = (c.rows-1, c.pos[1])
-                        elif(c.dir_x==1 and c.pos[0]>=c.rows-1):
-                            c.pos = (0, c.pos[1])
-                        elif(c.dir_y==1 and c.pos[1]>=c.rows-1):
-                            c.pos = (c.pos[0], 0)
-                        elif(c.dir_y==-1 and c.pos[1]<=0):
-                            c.pos = (c.pos[0], c.rows-1)
-                        # if we don't reach the edge of the screen, then
-                        # proceed to move as normal
-                        else:
-                            c.move(c.dir_x, c.dir_y)
+                else:
+                    if (c.dir_x==-1 and c.pos[0]<=0):
+                        c.pos = (c.rows-1, c.pos[1])
+                    elif(c.dir_x==1 and c.pos[0]>=c.rows-1):
+                        c.pos = (0, c.pos[1])
+                    elif(c.dir_y==1 and c.pos[1]>=c.rows-1):
+                        c.pos = (c.pos[0], 0)
+                    elif(c.dir_y==-1 and c.pos[1]<=0):
+                        c.pos = (c.pos[0], c.rows-1)
+                    # if we don't reach the edge of the screen, then
+                    # proceed to move as normal
+                    else:
+                        c.move(c.dir_x, c.dir_y)
     
     def reset(self, pos):
         self.head = cube(pos)
@@ -237,7 +237,7 @@ def main():
     # main loop
     flag = True
     while flag:
-        pygame.time.delay(50)
+        pygame.time.delay(1)
         # ensure that the game runs at 10 FPS
         clock.tick(100)
         # move the snake
