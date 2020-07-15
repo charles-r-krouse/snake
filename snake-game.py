@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 Simple snake game created using pygame to evaluate Syder and Anaconda for 
 learning python
@@ -7,11 +6,7 @@ learning python
 
 @notes:
   - https://techwithtim.net/tutorials/game-development-with-python/snake-pygame/tutorial-4/
-  - increased FPS speed -> originally 10 FPS which was too slow
   - up and down are reversed, and I do not know why
-  - TODO: draw eyes on the snake
-  - going off the screen does not work
-  - still lots of bugs
   - not using tkinter for the message box
 """
 
@@ -20,7 +15,6 @@ import time
 import sys
 import random
 import tkinter as tk
-import math
 
 # ----------------------------------------------------------------------------
 # Define classes
@@ -49,8 +43,14 @@ class cube(object):
         pygame.draw.rect(surface, self.color, (i*dis+1, j*dis+1, dis-2, dis-2))
         # draw the eyes
         if eyes:
-            pass
-    
+            center = dis/2
+            radius = 3
+            circle_middle = (int(i * dis + center - radius), int(j * dis + 8))
+            circle_middle2 = (int(i * dis + dis - radius * 2), int(j * dis + 8))
+            pygame.draw.rect(surface, (128, 0, 0), (i * dis + 1, j * dis + 1, dis - 2, dis - 2))
+            pygame.draw.circle(surface, (0, 0, 0), circle_middle, radius)
+            pygame.draw.circle(surface, (0, 0, 0), circle_middle2, radius)
+
     
 class snake(object):
     
